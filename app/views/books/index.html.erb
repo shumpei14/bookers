@@ -1,0 +1,32 @@
+<%= render 'layouts/list', book: @book, user: @user %>
+
+<h1>books</h1>
+
+<table class="col-xs-9">
+	<thead>
+
+		<tr>
+			<th>Title</th>
+			<th>Opinion</th>
+		</tr>
+	</thead>
+	<% @books.each do |book| %>
+		<tbody>
+			<tr>
+				<td><%= book.title %></td>
+				<td><%= book.body %></td>
+			</tr>
+		</tbody>
+	<% end %>
+</table>
+
+
+<% if @book.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

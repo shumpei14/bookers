@@ -1,0 +1,8 @@
+<%= render 'layouts/list', book: @book, user: @user %>
+<h4>Book detail</h4>
+<%= @book.title %>
+<%= @book.body %>
+<% if current_user == @book.user %>
+<%=link_to"Edit",edit_book_path(params[:id]) %>
+<%=link_to"destroy",book_path(@book),method: :delete,"data-confirm" => "Are you sure？" %>
+<% end %>
