@@ -8,12 +8,17 @@ class BooksController < ApplicationController
 
     def show
         @book = Book.find(params[:id])
-        @user = User.find(current_user.id)
+        @user = @book.user
+        @newbook = Book.new
     end
     def edit
         @book = Book.find(params[:id])
         if current_user != @book.user
+        flash[:notice] = "Book was successfully edit"
         redirect_to books_path
+        else
+        @book = Book.find(params[:id])
+        flash[:notice] = "Book edit error"
     end
 
     end
@@ -33,19 +38,22 @@ class BooksController < ApplicationController
         	redirect_to book_path(book.id)
         else
             @user = User.find(current_user.id)
-            flash[:notice] = "error"
+            flash[:notice] = "2 errors prohibited this obj from being saved:"
             @books = Book.all
             @book=book
             render :index
         end
     end
     def update
-        book = Book.find(params[:id])
-        book.update(book_params)
-        if book.save
-        flash[:notice] = "You have updated book successfully."
-        redirect_to book_path(book.id)
-    end
+        @book = Book.find(params[:id])
+        @book.update(book_params)
+        if @book.save
+            flash[:notice] = "You have updated book successfully."
+            redirect_to book_path(@book.id)
+        else
+            render :edit
+        end
+
     end
 
 	private

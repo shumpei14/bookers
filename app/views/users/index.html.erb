@@ -1,4 +1,24 @@
 <%= render 'layouts/list', book: @book, user: @user %>
-<h1>books</h1>
+<div class="col-xs-9">
+<h1>Users</h1>
+<table>
+	<thead>
+		<tr>
+			<th>img</th>
+			<th>name</th>
+			<th></th>
+		</tr>
+	</thead>
+<% @users.each do|user| %>
+	<tbody>
+		<tr>
+			<td>
+			<%= attachment_image_tag user,:profile_image, :fill, 60, 60, format: 'jpeg',fallback: "no_image.jpg"  %></td>
+			<td><%= user.name %></td>
+			<td><%= link_to "Show", user_path(user.id) %></td>
+		</tr>
+	</tbody>
+<% end %>
 
-
+</table>
+</div>

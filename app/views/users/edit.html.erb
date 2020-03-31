@@ -10,6 +10,17 @@
 
 <h4>Introduction</h4>
 <%= f.text_area :introduction %>
-<%= f.submit 'Update user' %>
+<%= f.submit 'Update User' %>
 
+<% end %>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <p>error</p>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
